@@ -1,83 +1,1433 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sounds</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active & Passive Voice</title>
 
-    <style>
-        body {
-            text-align: center;
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
+<style>
+:root{
+    --cream:#f5eee4;
+    --beige:#e5d2bc;
+    --light:#fffaf4;
+    --brown:#8b6f52;
+    --dark:#49382b;
+    --black:#211d19;
+    --muted:#75685c;
+    --border:#d5c0a8;
+    --white:#fffdf9;
+}
 
-        h1 {
-            margin-top: 20px;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        .music img {
-            width: 200px;
-            margin: 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:var(--cream);
+    color:var(--black);
+    overflow:hidden;
+}
 
-        .music img:hover {
-            transform: scale(1.1);
-        }
+/* TOP BAR */
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:65px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 6%;
+    background:rgba(245,238,228,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    z-index:1000;
+}
 
-        a {
-            color: yellow;
-            text-decoration: none;
-            font-size: 20px;
-        }
+.logo{
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:4px;
+    color:var(--dark);
+}
 
-        a:hover {
-            color: orange;
-        }
-    </style>
+.counter{
+    font-family:Arial,sans-serif;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* SLIDES */
+.presentation{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+.slider{
+    display:flex;
+    height:100%;
+    transition:transform .7s cubic-bezier(.77,0,.18,1);
+}
+
+.slide{
+    min-width:100vw;
+    height:100vh;
+    padding:90px 7% 100px;
+    overflow-y:auto;
+}
+
+.slide-inner{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.eyebrow{
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--brown);
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(50px,7vw,90px);
+    line-height:.95;
+    color:var(--black);
+    margin-bottom:25px;
+}
+
+h2{
+    font-size:clamp(38px,5vw,60px);
+    color:var(--dark);
+    margin-bottom:18px;
+}
+
+h3{
+    color:var(--dark);
+    margin-bottom:12px;
+}
+
+.subtitle{
+    font-family:Arial,sans-serif;
+    max-width:800px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* TITLE */
+.home{
+    display:flex;
+    align-items:center;
+    text-align:center;
+}
+
+.home .slide-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* CARDS */
+.card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+    margin:18px 0;
+    box-shadow:0 8px 25px rgba(73,56,42,.06);
+}
+
+.card p{
+    font-family:Arial,sans-serif;
+    color:#514940;
+    line-height:1.7;
+    margin:8px 0;
+}
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* BUTTONS */
+button{
+    border:none;
+    background:var(--dark);
+    color:white;
+    padding:11px 20px;
+    border-radius:30px;
+    cursor:pointer;
+    font-family:Arial,sans-serif;
+    font-weight:bold;
+    font-size:12px;
+    transition:.25s;
+    margin:5px;
+}
+
+button:hover{
+    background:var(--brown);
+    transform:translateY(-2px);
+}
+
+.outline{
+    background:transparent;
+    color:var(--dark);
+    border:1px solid var(--border);
+}
+
+/* REVEAL */
+.reveal{
+    display:none;
+    margin-top:14px;
+    padding:17px;
+    background:var(--light);
+    border-left:3px solid var(--brown);
+    border-radius:10px;
+    font-family:Arial,sans-serif;
+    line-height:1.6;
+}
+
+.reveal.show{
+    display:block;
+}
+
+/* LIST */
+ul{
+    padding-left:22px;
+}
+
+li{
+    font-family:Arial,sans-serif;
+    color:#514940;
+    line-height:1.7;
+    margin:7px 0;
+}
+
+/* TABLE */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(73,56,42,.06);
+}
+
+table{
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+}
+
+th{
+    background:var(--dark);
+    color:white;
+    padding:15px;
+    text-align:left;
+}
+
+td{
+    padding:13px 15px;
+    border-bottom:1px solid var(--border);
+    color:#514940;
+    line-height:1.5;
+    vertical-align:top;
+}
+
+tr:hover td{
+    background:#faf3ea;
+}
+
+td:first-child{
+    font-weight:bold;
+    color:var(--dark);
+}
+
+/* WHERE BOX - FORMULA SLIDE */
+.where-box{
+    margin-top:22px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px 26px;
+}
+
+.where-box h3{
+    margin-bottom:12px;
+}
+
+.where-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px 25px;
+}
+
+.where-grid div{
+    font-family:Arial,sans-serif;
+    color:#514940;
+    padding:7px 0;
+}
+
+/* CONVERSION TABLE */
+.conversion-table td{
+    vertical-align:middle;
+}
+
+.passive-example{
+    display:none;
+    margin-top:8px;
+    padding:10px 12px;
+    background:#eee1d1;
+    border-radius:9px;
+    color:var(--dark);
+    line-height:1.5;
+}
+
+.passive-example.show{
+    display:block;
+}
+
+.show-passive{
+    padding:7px 13px;
+    font-size:10px;
+}
+
+/* TWO OBJECTS */
+.object-box{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+    margin-top:20px;
+}
+
+.object-line{
+    margin:9px 0;
+    font-family:Arial,sans-serif;
+    color:#514940;
+}
+
+/* PRACTICE */
+.question{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:20px;
+    margin:14px 0;
+}
+
+.question-text{
+    font-family:Arial,sans-serif;
+    line-height:1.6;
+}
+
+.practice-answer{
+    display:none;
+    margin-top:10px;
+    padding:14px;
+    border-radius:10px;
+    background:#e8ddcf;
+    color:var(--dark);
+    font-family:Arial,sans-serif;
+    line-height:1.6;
+}
+
+.practice-answer.show{
+    display:block;
+}
+
+/* NAVIGATION */
+.navigation{
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 10px;
+    background:rgba(255,253,249,.94);
+    border:1px solid var(--border);
+    border-radius:40px;
+    box-shadow:0 8px 25px rgba(73,56,42,.12);
+    z-index:1000;
+}
+
+.nav-btn{
+    width:39px;
+    height:39px;
+    padding:0;
+    margin:0;
+    border-radius:50%;
+}
+
+.dots{
+    display:flex;
+    gap:5px;
+}
+
+.dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--border);
+}
+
+.dot.active{
+    width:20px;
+    border-radius:10px;
+    background:var(--brown);
+}
+
+.progress{
+    position:fixed;
+    bottom:0;
+    left:0;
+    height:3px;
+    background:var(--dark);
+    z-index:2000;
+    transition:width .6s ease;
+}
+
+@media(max-width:750px){
+
+    .slide{
+        padding:85px 18px 100px;
+    }
+
+    .two-column{
+        grid-template-columns:1fr;
+    }
+
+    .where-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    table{
+        min-width:850px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <h1>Sounds</h1>
-    <p>Click a picture to play music</p>
+<header class="topbar">
+    <div class="logo">VOICE</div>
 
-    <!-- MUSIC SECTION -->
-    <div class="music">
-        <img src="kokila.png" onclick="toggleMusic('Kokilla.mp3')" alt="Kokila">
-        <img src="hanuman.jfif" onclick="toggleMusic('hanuman_chalisa.mp3')" alt="Hanuman Chalisa">
-        <img src="ram.jpg" onclick="toggleMusic('Ram_Siya_Ram.mp3')" alt="Ram Siya Ram">
-        <img src="golden_deer.jfif" onclick="toggleMusic('deer_sound.mp3')" alt="Deer Sound">
+    <div class="counter">
+        <span id="currentSlide">01</span> /
+        <span id="totalSlides">10</span>
+    </div>
+</header>
+
+
+<main class="presentation">
+
+<div class="slider" id="slider">
+
+
+<!-- =====================================================
+1. TITLE
+===================================================== -->
+
+<section class="slide home">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        English Grammar
     </div>
 
-    <audio id="audioPlayer"></audio>
+    <h1>
+        Active &<br>
+        Passive Voice
+    </h1>
 
+    <p class="subtitle">
+        Voice, types, uses, rules and conversion.
+    </p>
+
+    <button onclick="nextSlide()">
+        Start Learning →
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+2. WHAT IS VOICE
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        01 — Introduction
+    </div>
+
+    <h2>What is Voice?</h2>
+
+    <div class="card">
+
+        <button onclick="reveal('voiceDefinition')">
+            Show Definition
+        </button>
+
+        <div id="voiceDefinition" class="reveal">
+
+            <p>
+                Voice tells us whether the subject does an
+                action or the action is done to the subject/object.
+            </p>
+
+            <p>
+                Simply, it shows whether the subject is doing
+                an action or receiving an action.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Example</h3>
+
+        <button class="outline"
+                onclick="reveal('voiceExample')">
+            Show Example
+        </button>
+
+        <div id="voiceExample" class="reveal">
+
+            <p>
+                <b>Ram writes a letter.</b>
+                → Ram does the action.
+            </p>
+
+            <p>
+                <b>A letter is written by Ram.</b>
+                → A letter receives the action.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+3. TYPES
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        02 — Types
+    </div>
+
+    <h2>Types of Voice</h2>
+
+    <div class="two-column">
+
+        <div class="card">
+
+            <h3>Active Voice</h3>
+
+            <button onclick="reveal('activeDefinition')">
+                Show Definition
+            </button>
+
+            <div id="activeDefinition" class="reveal">
+
+                <p>
+                    The subject performs the action.
+                </p>
+
+                <p>
+                    <b>Example:</b> Ram writes a letter.
+                </p>
+
+                <p>
+                    Here Ram is the subject and performs
+                    the action. Ram is the subject and doer.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Passive Voice</h3>
+
+            <button onclick="reveal('passiveDefinition')">
+                Show Definition
+            </button>
+
+            <div id="passiveDefinition" class="reveal">
+
+                <p>
+                    The action is done to the subject.
+                </p>
+
+                <p>
+                    The receiver of the action is the subject.
+                </p>
+
+                <p>
+                    <b>Example:</b> A letter is written by Ram.
+                </p>
+
+                <p>
+                    Here, the subject does not do the action.
+                    The action is done to the subject.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+4. USES
+NO REVEAL
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        03 — Uses
+    </div>
+
+    <h2>Uses of Voice</h2>
+
+    <div class="two-column">
+
+        <div class="card">
+
+            <h3>Uses of Active Voice</h3>
+
+            <p>Active voice is generally used when:</p>
+
+            <ul>
+                <li>
+                    We want the sentence to be clear
+                    and direct.
+                </li>
+
+                <li>
+                    We want to emphasize who performed
+                    the action.
+                </li>
+
+                <li>
+                    We want writing to be short and simple.
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Uses of Passive Voice</h3>
+
+            <p>Passive voice is used when:</p>
+
+            <ul>
+                <li>The doer is unknown.</li>
+
+                <li>The doer is unimportant.</li>
+
+                <li>
+                    We want to emphasize the action
+                    or receiver.
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+5. RULES
+ONLY RULES
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        04 — Rules
+    </div>
+
+    <h2>Rules for Conversion</h2>
+
+    <div class="card">
+
+        <ul>
+
+            <li>Object becomes Subject.</li>
+
+            <li>Subject becomes Object.</li>
+
+            <li>Main verb changes to V³.</li>
+
+            <li>Add a suitable helping verb.</li>
+
+            <li>Use <b>by + doer</b> if needed.</li>
+
+            <li>
+                If there is no object, passive voice is
+                usually not possible.
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+6. FORMULAS + WHERE
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        05 — Formulas
+    </div>
+
+    <h2>Formulas for Conversion</h2>
+
+    <div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Type / Tense</th>
+<th>Active Voice Formula</th>
+<th>Passive Voice Formula</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>Simple Present</td>
+<td>S + V¹(s/es) + O</td>
+<td>O + is/am/are + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Present Continuous</td>
+<td>S + is/am/are + V-ing + O</td>
+<td>O + is/am/are + being + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Present Perfect</td>
+<td>S + has/have + V³ + O</td>
+<td>O + has/have + been + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Simple Past</td>
+<td>S + V² + O</td>
+<td>O + was/were + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Past Continuous</td>
+<td>S + was/were + V-ing + O</td>
+<td>O + was/were + being + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Past Perfect</td>
+<td>S + had + V³ + O</td>
+<td>O + had + been + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Simple Future</td>
+<td>S + will + V¹ + O</td>
+<td>O + will + be + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Future Perfect</td>
+<td>S + will have + V³ + O</td>
+<td>O + will have been + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Negative</td>
+<td>S + HV + not + V + O</td>
+<td>O + HV + not + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Interrogative</td>
+<td>HV + S + V + O?</td>
+<td>HV + O + V³ + by + S?</td>
+</tr>
+
+<tr>
+<td>WH-Question</td>
+<td>WH + HV + S + V + O?</td>
+<td>WH + HV + O + V³ + by + S?</td>
+</tr>
+
+<tr>
+<td>Modal</td>
+<td>S + Modal + V¹ + O</td>
+<td>O + Modal + be + V³ + by + S</td>
+</tr>
+
+<tr>
+<td>Imperative / Command</td>
+<td>V¹ + O</td>
+<td>Let + O + be + V³</td>
+</tr>
+
+<tr>
+<td>Negative Imperative</td>
+<td>Do not + V¹ + O</td>
+<td>Let + O + not + be + V³</td>
+</tr>
+
+<tr>
+<td>Request</td>
+<td>Please + V¹ + O</td>
+<td>You are requested to + V¹ + O</td>
+</tr>
+
+<tr>
+<td>Advice</td>
+<td>V¹ + O</td>
+<td>You are advised to + V¹ + O</td>
+</tr>
+
+</tbody>
+
+</table>
+
+    </div>
+
+
+    <!-- WHERE BELONGS HERE -->
+
+    <div class="where-box">
+
+        <h3>Where,</h3>
+
+        <div class="where-grid">
+
+            <div><b>S</b> = Subject</div>
+
+            <div><b>O</b> = Object</div>
+
+            <div><b>V¹</b> = Base form of verb</div>
+
+            <div><b>V²</b> = Past form</div>
+
+            <div><b>V³</b> = Past participle</div>
+
+            <div><b>HV</b> = Helping verb</div>
+
+            <div><b>V-ing</b> = Present participle</div>
+
+            <div>
+                <b>Modal</b> = can, could, may,
+                might, must, should, etc.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+7. CONVERSION EXAMPLES
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        06 — Conversion
+    </div>
+
+    <h2>Active → Passive</h2>
+
+    <p class="subtitle">
+        First read the active sentence.
+        Click <b>Show Passive</b> whenever you want
+        to see its conversion.
+    </p>
+
+    <br>
+
+    <div class="table-wrapper">
+
+<table class="conversion-table">
+
+<thead>
+
+<tr>
+<th>Type / Tense</th>
+<th>Active Voice</th>
+<th>Passive Voice</th>
+</tr>
+
+</thead>
+
+<tbody id="conversionRows">
+</tbody>
+
+</table>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+8. TWO OBJECTS
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        07 — Two Objects
+    </div>
+
+    <h2>Conversion with Two Objects</h2>
+
+    <div class="card">
+
+        <p>
+            Some sentences contain two objects:
+            a direct object and an indirect object.
+        </p>
+
+        <p>
+            When a sentence has two objects, either object
+            can become the subject of the passive voice.
+            However, the indirect object is often made the
+            subject because it sounds more natural.
+        </p>
+
+    </div>
+
+    <div class="object-box">
+
+        <h3>Example</h3>
+
+        <p class="object-line">
+            <b>Active:</b>
+            The teacher taught us English.
+        </p>
+
+        <p class="object-line">
+            <b>Passive:</b>
+            We were taught English by the teacher.
+        </p>
+
+        <p class="object-line">
+            <b>Passive:</b>
+            English was taught to us by the teacher.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Parts of the Sentence</h3>
+
+        <p>
+            <b>The teacher</b> → Subject
+        </p>
+
+        <p>
+            <b>taught</b> → Verb
+        </p>
+
+        <p>
+            <b>us</b> → Indirect Object
+        </p>
+
+        <p>
+            <b>English</b> → Direct Object
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+9. PRACTICE
+===================================================== -->
+
+<section class="slide">
+
+<div class="slide-inner">
+
+    <div class="eyebrow">
+        08 — Practice
+    </div>
+
+    <h2>Practice Questions</h2>
+
+    <p class="subtitle">
+        Try each sentence first, then reveal the answer.
+    </p>
+
+    <div id="questions"></div>
+
+</div>
+
+</section>
+
+
+</div>
+</main>
+
+
+<!-- NAVIGATION -->
+
+<div class="navigation">
+
+    <button class="nav-btn"
+            onclick="previousSlide()">←</button>
+
+    <div class="dots" id="dots"></div>
+
+    <button class="nav-btn"
+            onclick="nextSlide()">→</button>
+
+</div>
+
+<div class="progress" id="progress"></div>
+
+
+<script>
+
+/* =====================================================
+SLIDE SYSTEM
+===================================================== */
+
+const slider = document.getElementById("slider");
+const slides = document.querySelectorAll(".slide");
+
+let currentSlide = 0;
+const totalSlides = slides.length;
+
+document.getElementById("totalSlides").textContent =
+    String(totalSlides).padStart(2,"0");
+
+
+/* DOTS */
+
+const dotsContainer = document.getElementById("dots");
+
+for(let i=0;i<totalSlides;i++){
+
+    const dot = document.createElement("div");
+
+    dot.className = "dot";
+
+    dotsContainer.appendChild(dot);
+}
+
+
+/* SHOW SLIDE */
+
+function showSlide(index){
+
+    if(index < 0)
+        index = 0;
+
+    if(index >= totalSlides)
+        index = totalSlides - 1;
+
+    currentSlide = index;
+
+    slider.style.transform =
+        `translateX(-${index * 100}vw)`;
+
+    document.getElementById("currentSlide").textContent =
+        String(index + 1).padStart(2,"0");
+
+    document.getElementById("progress").style.width =
+        `${((index + 1) / totalSlides) * 100}%`;
+
+    document.querySelectorAll(".dot").forEach((dot,i)=>{
+
+        dot.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+}
+
+
+/* NEXT */
+
+function nextSlide(){
+
+    if(currentSlide < totalSlides - 1)
+        showSlide(currentSlide + 1);
+
+}
+
+
+/* PREVIOUS */
+
+function previousSlide(){
+
+    if(currentSlide > 0)
+        showSlide(currentSlide - 1);
+
+}
+
+
+/* REVEAL */
+
+function reveal(id){
+
+    const element =
+        document.getElementById(id);
+
+    if(element)
+        element.classList.toggle("show");
+
+}
+
+
+/* KEYBOARD */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key === "ArrowRight")
+        nextSlide();
+
+    if(e.key === "ArrowLeft")
+        previousSlide();
+
+});
+
+
+/* =====================================================
+CONVERSION EXAMPLES
+===================================================== */
+
+const conversions = [
+
+{
+    type:"Simple Present",
+    active:"Ram writes a letter.",
+    passive:"A letter is written by Ram."
+},
+
+{
+    type:"Present Continuous",
+    active:"Ram is writing a letter.",
+    passive:"A letter is being written by Ram."
+},
+
+{
+    type:"Present Perfect",
+    active:"Ram has written a letter.",
+    passive:"A letter has been written by Ram."
+},
+
+{
+    type:"Simple Past",
+    active:"Ram wrote a letter.",
+    passive:"A letter was written by Ram."
+},
+
+{
+    type:"Past Continuous",
+    active:"Ram was writing a letter.",
+    passive:"A letter was being written by Ram."
+},
+
+{
+    type:"Past Perfect",
+    active:"Ram had written a letter.",
+    passive:"A letter had been written by Ram."
+},
+
+{
+    type:"Simple Future",
+    active:"Ram will write a letter.",
+    passive:"A letter will be written by Ram."
+},
+
+{
+    type:"Future Perfect",
+    active:"Ram will have written a letter.",
+    passive:"A letter will have been written by Ram."
+},
+
+{
+    type:"Negative",
+    active:"Ram does not write a letter.",
+    passive:"A letter is not written by Ram."
+},
+
+{
+    type:"Interrogative",
+    active:"Does Ram write a letter?",
+    passive:"Is a letter written by Ram?"
+},
+
+{
+    type:"WH-Question",
+    active:"Who writes the letter?",
+    passive:"By whom is the letter written?"
+},
+
+{
+    type:"Modal",
+    active:"Ram can write a letter.",
+    passive:"A letter can be written by Ram."
+},
+
+{
+    type:"Imperative / Command",
+    active:"Write a letter.",
+    passive:"Let a letter be written."
+},
+
+{
+    type:"Negative Imperative",
+    active:"Do not write a letter.",
+    passive:"Let a letter not be written."
+},
+
+{
+    type:"Request",
+    active:"Please write a letter.",
+    passive:"You are requested to write a letter."
+},
+
+{
+    type:"Advice",
+    active:"Write the letter carefully.",
+    passive:"You are advised to write the letter carefully."
+}
+
+];
+
+
+const conversionRows =
+    document.getElementById("conversionRows");
+
+
+conversions.forEach((item,index)=>{
+
+    const id = "passive" + index;
+
+    conversionRows.innerHTML += `
+
+    <tr>
+
+        <td>
+            ${item.type}
+        </td>
+
+        <td>
+            ${item.active}
+        </td>
+
+        <td>
+
+            <button
+                class="show-passive"
+                onclick="reveal('${id}')">
+
+                Show Passive
+
+            </button>
+
+            <div
+                id="${id}"
+                class="passive-example">
+
+                ${item.passive}
+
+            </div>
+
+        </td>
+
+    </tr>
+
+    `;
+
+});
+
+
+/* =====================================================
+PRACTICE QUESTIONS
+===================================================== */
+
+const questions = [
+
+{
+    q:"The students complete their homework.",
+    a:"Their homework is completed by the students."
+},
+
+{
+    q:"The school will organize a program.",
+    a:"A program will be organized by the school."
+},
+
+{
+    q:"Ram does not clean his room.",
+    a:"His room is not cleaned by Ram."
+},
+
+{
+    q:"Did the teacher check the homework?",
+    a:"Was the homework checked by the teacher?"
+},
+
+{
+    q:"You must follow the rules.",
+    a:"The rules must be followed by you."
+},
+
+{
+    q:"Open the door.",
+    a:"Let the door be opened."
+},
+
+{
+    q:"The police arrested the thief yesterday.",
+    a:"The thief was arrested by the police yesterday."
+},
+
+{
+    q:"The principal gave the winners their certificates.",
+    a:
+    `The winners were given their certificates by the principal.
     <br><br>
+    The certificates were given to the winners by the principal.`
+}
 
-    <!-- LINK TO GALLERY PAGE -->
-    <a href="gallery.html">📸 View Drama Gallery</a>
+];
 
-    <!-- JAVASCRIPT -->
-    <script>
-        const audio = document.getElementById("audioPlayer");
-        let currentSong = "";
 
-        function toggleMusic(song) {
-            if (currentSong === song) {
-                if (audio.paused) {
-                    audio.play();
-                } else {
-                    audio.pause();
-                }
-            } else {
-                audio.src = song;
-                audio.play();
-                currentSong = song;
-            }
-        }
-    </script>
+const questionContainer =
+    document.getElementById("questions");
+
+
+questions.forEach((item,index)=>{
+
+    const id = "answer" + index;
+
+    questionContainer.innerHTML += `
+
+    <div class="question">
+
+        <div class="question-text">
+
+            <b>${index + 1}.</b>
+            ${item.q}
+
+        </div>
+
+        <button
+            class="outline"
+            onclick="reveal('${id}')">
+
+            Reveal Answer
+
+        </button>
+
+        <div
+            id="${id}"
+            class="practice-answer">
+
+            ${item.a}
+
+        </div>
+
+    </div>
+
+    `;
+
+});
+
+
+/* START */
+
+showSlide(0);
+
+</script>
 
 </body>
 </html>
